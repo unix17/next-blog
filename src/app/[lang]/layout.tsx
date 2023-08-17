@@ -45,8 +45,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   if (!meta.data) return FALLBACK_SEO;
 
-  const { metadata, favicon } = meta.data.attributes;
-  const { url } = favicon.data.attributes;
+  const { metadata, favicon } = meta?.data?.attributes || {};
+  const { url } = favicon?.data?.attributes || {};
 
   return {
     title: metadata.metaTitle,
@@ -68,12 +68,12 @@ export default  async function RootLayout({ children, params}: {
       const { navbar, footer } = global?.data?.attributes;
 
     const navbarLogoUrl = getStrapiMedia(
-        navbar.navbarLogo.logoImg.data.attributes.url
+        navbar?.navbarLogo?.logoImg?.data?.attributes?.url
     );
 
 
     const footerLogoUrl = getStrapiMedia(
-        footer.footerLogo.logoImg.data.attributes.url
+        footer?.footerLogo?.logoImg?.data?.attributes?.url
     );
 
     return (
@@ -82,9 +82,9 @@ export default  async function RootLayout({ children, params}: {
       </head>
         <body suppressHydrationWarning={true}>
         <Navbar
-            links={navbar.links}
+            links={navbar?.links}
             logoUrl={navbarLogoUrl}
-            logoText={navbar.navbarLogo.logoText}
+            logoText={navbar?.navbarLogo.logoText}
         />
 
         <main className="dark:bg-black dark:text-gray-100 min-h-screen">
@@ -93,11 +93,11 @@ export default  async function RootLayout({ children, params}: {
 
         <Footer
             logoUrl={footerLogoUrl}
-            logoText={footer.footerLogo.logoText}
-            menuLinks={footer.menuLinks}
-            categoryLinks={footer.categories.data}
-            legalLinks={footer.legalLinks}
-            socialLinks={footer.socialLinks}
+            logoText={footer?.footerLogo?.logoText}
+            menuLinks={footer?.menuLinks}
+            categoryLinks={footer?.categories?.data}
+            legalLinks={footer?.legalLinks}
+            socialLinks={footer?.socialLinks}
         />
         </body>
       </html>

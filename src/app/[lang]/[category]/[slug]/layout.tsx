@@ -29,8 +29,8 @@ async function fetchSideMenuData(filter: string) {
     );
 
     return {
-      articles: articlesResponse.data,
-      categories: categoriesResponse.data,
+      articles: articlesResponse?.data,
+      categories: categoriesResponse?.data,
     };
   } catch (error) {
     console.error(error);
@@ -71,8 +71,8 @@ export default async function LayoutRoute({
     category: string;
   };
 }) {
-  const { category } = params;
-  const { categories, articles } = (await fetchSideMenuData(category)) as Data;
+  const { category } = params || {};
+  const { categories, articles } = (await fetchSideMenuData(category)) as Data || {};
 
   return (
     <section className="container p-8 mx-auto space-y-6 sm:space-y-12">
